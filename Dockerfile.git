@@ -1,0 +1,60 @@
+FROM docker.io/debian:bookworm-slim AS builder
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    make \
+    g++ \
+    build-essential \
+    qtbase5-dev \
+    qtchooser \
+    qt5-qmake \
+    qtbase5-dev-tools \
+    ca-certificates
+
+WORKDIR /usr/src
+
+RUN git clone https://github.com/rodolforg/fet.git
+
+# UI
+WORKDIR /usr/src/fet
+
+RUN sed -i '1s/^/#include <QSet>\n/' src/interface/errorrenderer.cpp
+
+RUN qmake fet.pro && make -j$(nproc) 2>&1 | tee make_fet.log
+
+# CLI
+WORKDIR /usr/src/fet/src
+
+RUN qmake src-cl.pro && make -j$(nproc) 2>&1 | tee make_fet-cl.log
+
+# Cleanup
+WORKDIR /usr/src/fet
+RUN make clean
+
+
+# Final stage
+
+FROM docker.io/debian:bookworm-slim
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y \
+    libqt5core5a libqt5xml5 ca-certificates
+
+RUN mkdir -p /app/fet
+
+COPY --from=builder /usr/src/fet /app/fet
+
+WORKDIR /app/fet
+
+ENTRYPOINT ["./fet-cl"]
+CMD ["--help"]
+
+LABEL org.opencontainers.image.licenses="AGPL-3.0"
+LABEL org.opencontainers.image.authors="Liviu Lalescu (FET) / Custom Dockerized by Tredddo"
+LABEL org.opencontainers.image.title="FET - Free Timetabling Software"
+LABEL org.opencontainers.image.description="Dockerized version of FET command-line interface"
+LABEL org.opencontainers.image.source="https://github.com/Tredddo/Lab_Cloud_Computing-fet"
+LABEL org.opencontainers.image.url="https://lalescu.ro/liviu/fet/"
