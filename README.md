@@ -1,7 +1,7 @@
 # Dockerized FET (University Project)
 
 > **Special Thanks to the Creator**
-> Before diving into this Docker implementation, a massive and heartfelt thank you goes to **Liviu Lalescu**, the original developer of FET. His dedication to developing and distributing this software globally, at no cost, represents a significant contribution to the educational community. His commitment to the open-source community are truly inspiring.
+> Before diving into this Docker implementation, a massive and heartfelt thank you goes to **Liviu Lalescu**, developer of FET. His dedication to developing and distributing this software globally, at no cost, represents a significant contribution to the educational community. His commitment to the open-source community are truly inspiring.
 
 This repository provides containerized environments to run **FET**, the free timetabling software, using Podman/Docker.
 
