@@ -119,6 +119,18 @@ https://packages.debian.org/bookworm/libqt5gui5
 https://packages.debian.org/bookworm/libopengl0
 https://packages.debian.org/bookworm/libxcb-cursor0
 
+## Source Code Modifications (AGPL-3.0 Compliance)
+
+During the creation of the `Dockerfile.source`, a minor modification to the original FET source code was required to ensure successful compilation in the Debian Bookworm environment due to a missing Qt header.
+
+To fix the compilation error, the following command is applied automatically during the Docker build process to inject the missing `#include <QSet>` directive at the very first line of the code:
+
+**File modified:** `src/interface/errorrenderer.cpp`
+**Command applied:**
+```bash
+  sed -i '1s/^/#include <QSet>\n/' src/interface/errorrenderer.cpp
+```
+
 **License**
 
 The Dockerfiles in this repository are released under the AGPL-3.0 License. FET is developed by Liviu Lalescu and licensed under AGPL-3.0.
