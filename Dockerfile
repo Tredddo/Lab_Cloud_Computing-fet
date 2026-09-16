@@ -50,7 +50,7 @@ RUN chmod +x /app/fet/bin/fet && chmod +x /app/fet/bin/fet-cl
 
 WORKDIR /app/fet/bin
 
-ENTRYPOINT ["./fet-cl"]
+ENTRYPOINT ["/app/fet/bin/fet-cl"]
 CMD ["--help"]
 
 LABEL org.opencontainers.image.licenses="AGPL-3.0"

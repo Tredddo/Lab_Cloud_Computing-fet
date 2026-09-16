@@ -1,0 +1,8 @@
+services:
+  fet-cl:
+    image: tredddo/fet:latest
+    volumes:
+      - ./data:/app/data
+    command:
+      - "--inputfile=/app/data/test.fet"
+      - "--outputdir=/app/data/output"

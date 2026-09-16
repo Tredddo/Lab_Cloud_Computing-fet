@@ -49,7 +49,7 @@ COPY --from=builder /usr/src/fet /app/fet
 
 WORKDIR /app/fet
 
-ENTRYPOINT ["./fet-cl"]
+ENTRYPOINT ["/app/fet/fet-cl"]
 CMD ["--help"]
 
 LABEL org.opencontainers.image.licenses="AGPL-3.0"
