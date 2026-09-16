@@ -52,9 +52,9 @@ podman tag fet-cli:latest docker.io/<username>/<repo>:<tag>
 
 # Push to Docker Hub
 podman push docker.io/<username>/<repo>:<tag>
-
-VM Setup for compilation testing
 ```
+
+## VM Setup for compilation testing
 
 To test the compilation environment securely, I used a QEMU Virtual Machine:
 ```Bash
@@ -69,7 +69,7 @@ qemu-system-x86_64 -enable-kvm -m 4096 -smp 2 -hda ubuntu-disk.qcow2
 
 ## Dependencies & Packages used (Debian Bookworm)
 
-For the Build Stage:
+### For the Build Stage:
 (Note: The author of FET suggests compiling Qt. build-essential was suggested by the author and includes some of the packages listed and more).
 
     git, make, g++, build-essential
@@ -78,7 +78,7 @@ For the Build Stage:
 
     ca-certificates, libqt5network5
 
-For rendering the UI (Runtime):
+### For rendering the UI (Runtime):
 
     libqt5core5a, libqt5xml5, libgl1, libglib2.0-0
 
@@ -86,7 +86,7 @@ For rendering the UI (Runtime):
 
 ## List of the link of the packages used
 
-For the Build Stage:
+### For the Build Stage:
 https://packages.debian.org/bookworm/git
 https://packages.debian.org/bookworm/make
 https://packages.debian.org/bookworm/g++
@@ -99,7 +99,7 @@ https://packages.debian.org/bookworm/ca-certificates
 
 https://packages.debian.org/bookworm/libqt5network5 (Used to check for updates)
 
-For rendering the UI (Runtime):
+### For rendering the UI (Runtime):
 https://packages.debian.org/it/bookworm/libqt5core5a
 https://packages.debian.org/bookworm/libqt5xml5
 https://packages.debian.org/bookworm/libgl1
@@ -109,6 +109,6 @@ https://packages.debian.org/bookworm/libqt5gui5
 https://packages.debian.org/bookworm/libopengl0
 https://packages.debian.org/bookworm/libxcb-cursor0
     
-License
+**License**
 
 The Dockerfiles in this repository are released under the AGPL-3.0 License. FET is developed by Liviu Lalescu and licensed under AGPL-3.0.
