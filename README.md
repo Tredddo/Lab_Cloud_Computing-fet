@@ -25,9 +25,12 @@ podman run --rm --entrypoint ls localhost/fet:latest -la
 ## Import files and use the UI
 
 If you want to use the graphical interface of FET, you need to forward the X11 socket to the container.
-```Bash
 
-xhost -local:
+> **Security Warning (X11 Forwarding)**
+> The use of `xhost` and the sharing of the `/tmp/.X11-unix` socket intentionally bypasses container display isolation. This setup is provided **strictly for local testing and development purposes** to access the UI.
+
+```Bash
+xhost +local:
 
 podman run --rm -i \
   -e DISPLAY=$DISPLAY \
@@ -35,6 +38,9 @@ podman run --rm -i \
   -v ~/Downloads/fet-dev/examples/Italy/2010/:/app/data \
   --entrypoint ./bin/fet \
   localhost/fet-cli
+
+# To disable:
+xhost -local:
 ```
 
 # Transparency & Development Process
@@ -97,7 +103,7 @@ https://packages.debian.org/bookworm/qtbase5-dev
 https://packages.debian.org/bookworm/qtbase5-dev-tools
 https://packages.debian.org/bookworm/ca-certificates
 
-https://packages.debian.org/bookworm/libqt5network5 (Used to check for updates)
+https://packages.debian.org/bookworm/libqt5network5 (Required for update checks)
 
 ### For rendering the UI (Runtime):
 https://packages.debian.org/it/bookworm/libqt5core5a
@@ -108,7 +114,7 @@ https://packages.debian.org/bookworm/libqt5widgets5
 https://packages.debian.org/bookworm/libqt5gui5
 https://packages.debian.org/bookworm/libopengl0
 https://packages.debian.org/bookworm/libxcb-cursor0
-    
+
 **License**
 
 The Dockerfiles in this repository are released under the AGPL-3.0 License. FET is developed by Liviu Lalescu and licensed under AGPL-3.0.
