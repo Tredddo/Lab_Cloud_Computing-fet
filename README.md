@@ -1,5 +1,8 @@
 # Dockerized FET (University Project)
 
+> [!NOTE] **Special Thanks to the Creator**
+> Before diving into this Docker implementation, a massive and heartfelt thank you goes to **Liviu Lalescu**, the original developer of FET. His dedication to developing and distributing this software globally, at no cost, represents a significant contribution to the educational community. His commitment to the open-source community are truly inspiring.
+
 This repository provides containerized environments to run **FET**, the free timetabling software, using Podman/Docker.
 
 It includes two setups:
@@ -26,7 +29,7 @@ podman run --rm --entrypoint ls localhost/fet:latest -la
 
 If you want to use the graphical interface of FET, you need to forward the X11 socket to the container.
 
-> **Security Warning (X11 Forwarding)**
+> [!IMPORTANT] **Security Warning (X11 Forwarding)**
 > The use of `xhost` and the sharing of the `/tmp/.X11-unix` socket intentionally bypasses container display isolation. This setup is provided **strictly for local testing and development purposes** to access the UI.
 
 ```Bash
@@ -76,7 +79,8 @@ qemu-system-x86_64 -enable-kvm -m 4096 -smp 2 -hda ubuntu-disk.qcow2
 ## Dependencies & Packages used (Debian Bookworm)
 
 ### For the Build Stage:
-(Note: The author of FET suggests compiling Qt. build-essential was suggested by the author and includes some of the packages listed and more).
+> [!NOTE]
+> The author of FET suggests compiling Qt. build-essential was suggested by the author and includes some of the packages listed and more.
 
     git, make, g++, build-essential
 
