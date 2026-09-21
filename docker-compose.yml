@@ -6,3 +6,14 @@ services:
     command:
       - "--inputfile=/app/data/test.fet"
       - "--outputdir=/app/data/output"
+    deploy:
+      resurces:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          memory: 100M
+
+
+# Resource reservations and limits added following the professor's suggestion
+# to mitigate potential memory leaks.
